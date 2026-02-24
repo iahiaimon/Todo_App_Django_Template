@@ -1,243 +1,300 @@
-<div class="h-full bg-white rounded-2xl shadow-lg p-6 flex flex-col justify-between">
-  <!-- Top Section -->
-  <div>
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-8">
-      <h1 class="text-2xl font-bold text-gray-800">Menu</h1>
 
-      <!-- Menu Icon -->
-      <button class="p-2 hover:bg-gray-100 rounded-lg transition">
-        <!-- bars icon -->
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-6 h-6 text-gray-600"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
+<div class="px-6 py-4">
+  <!-- Sidebar - Fixed on left -->
+  <div class="sidebar sticky transition-all duration-300">
+    
+    <!-- Menu Header -->
+    <div class="menu flex justify-between items-center mb-8">
+      <div class="text-2xl font-bold bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+        Menu
+      </div>
+      <button class="p-2 hover:bg-gray-700 rounded-xl transition-all duration-300 group">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
     </div>
 
-    <!-- Search -->
-    <div class="flex items-center bg-gray-100 rounded-xl px-3 py-2 mb-8">
-      <!-- search icon -->
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-5 h-5 text-gray-500"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M21 21l-4.35-4.35"
-        />
-      </svg>
-
+    <!-- Search Bar -->
+    <div class="search relative mb-8">
+      <div class="absolute left-4 top-1/2 -translate-y-1/2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+      </div>
       <input
+        class="w-full border border-gray-700 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
         type="text"
-        placeholder="Search tasks"
-        class="bg-transparent outline-none ml-3 w-full text-sm"
+        placeholder="Search tasks..."
       />
     </div>
 
-    <!-- Tasks -->
-    <div class="mb-8">
-      <p class="text-gray-400 text-sm mb-3">TASKS</p>
+    <!-- Tasks Section -->
+    <div class="tasks mb-8">
+      <h1 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
+        </svg>
+        Tasks
+      </h1>
 
       <!-- Upcoming -->
-      <div
-        class="flex justify-between items-center p-2 hover:bg-gray-100 rounded-lg cursor-pointer group"
-      >
+      <div class="group flex justify-between items-center p-3 hover:bg-gray-800/50 rounded-xl cursor-pointer transition-all duration-300 mb-1">
         <div class="flex items-center gap-3">
-          <!-- clock icon -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 text-blue-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 8v4l3 3"
-            />
-          </svg>
-
-          <span> Upcoming </span>
+          <div class="text-blue-400 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+            </svg>
+          </div>
+          <span class="font-medium">Upcoming</span>
         </div>
-
-        <span class="text-sm text-gray-400"> 10 </span>
+        <span class="bg-gray-800 text-gray-300 px-2.5 py-1 rounded-full text-xs font-semibold group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">24</span>
       </div>
 
       <!-- Today -->
-      <div
-        class="flex justify-between items-center p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
-      >
+      <div class="group flex justify-between items-center p-3 hover:bg-gray-800/50 rounded-xl cursor-pointer transition-all duration-300 mb-1">
         <div class="flex items-center gap-3">
-          <!-- calendar icon -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 text-green-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M8 7V3m8 4V3"
-            />
-          </svg>
-
-          Today
+          <div class="text-green-400 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+            </svg>
+          </div>
+          <span class="font-medium">Today</span>
         </div>
+        <span class="bg-gray-800 text-gray-300 px-2.5 py-1 rounded-full text-xs font-semibold group-hover:bg-green-500 group-hover:text-white transition-all duration-300">8</span>
+      </div>
 
-        <span class="text-sm text-gray-400"> 5 </span>
+      <!-- Calendar -->
+      <div class="group flex justify-between items-center p-3 hover:bg-gray-800/50 rounded-xl cursor-pointer transition-all duration-300 mb-1">
+        <div class="flex items-center gap-3">
+          <div class="text-purple-400 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+            </svg>
+          </div>
+          <span class="font-medium">Calendar</span>
+        </div>
+        <span class="text-xs text-gray-500">View</span>
+      </div>
+
+      <!-- Sticky Wall -->
+      <div class="group flex justify-between items-center p-3 hover:bg-gray-800/50 rounded-xl cursor-pointer transition-all duration-300">
+        <div class="flex items-center gap-3">
+          <div class="text-yellow-400 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+          </div>
+          <span class="font-medium">Sticky Wall</span>
+        </div>
+        <span class="text-xs text-gray-500">3 notes</span>
       </div>
     </div>
 
-    <!-- Lists -->
-    <div>
-      <p class="text-gray-400 text-sm mb-3">LISTS</p>
-
-      <!-- Personal -->
-      <div
-        class="flex justify-between items-center p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
-      >
-        <div class="flex items-center gap-3">
-          <!-- user icon -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 text-purple-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5.121 17.804A9 9 0 1118.364 4.56"
-            />
-          </svg>
-
-          Personal
-        </div>
-
-        <span class="text-sm text-gray-400"> 3 </span>
-      </div>
-
-      <!-- Work -->
-      <div
-        class="flex justify-between items-center p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
-      >
-        <div class="flex items-center gap-3">
-          <!-- briefcase icon -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 text-yellow-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12h6"
-            />
-          </svg>
-
-          Work
-        </div>
-
-        <span class="text-sm text-gray-400"> 6 </span>
-      </div>
-
-      <!-- Add List -->
-      <div
-        class="flex items-center gap-3 p-2 hover:bg-blue-50 text-blue-500 rounded-lg cursor-pointer mt-2"
-      >
-        <!-- plus icon -->
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-5 h-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 4v16m8-8H4"
-          />
+    <!-- Lists Section -->
+    <div class="list mb-8">
+      <h1 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
         </svg>
+        My Lists
+      </h1>
 
-        Add New List
+      <!-- Personal List -->
+      <div class="group flex justify-between items-center p-3 hover:bg-gray-800/50 rounded-xl cursor-pointer transition-all duration-300 mb-1">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 rounded-full bg-pink-500 group-hover:scale-150 transition-transform duration-300"></div>
+          <div class="flex items-center gap-2">
+            <span class="font-medium">Personal</span>
+            <span class="text-xs text-gray-500">· 12 tasks</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="bg-pink-500/20 text-pink-400 px-2 py-0.5 rounded-full text-xs">12</span>
+          <button class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 text-gray-500 hover:text-white">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Work List -->
+      <div class="group flex justify-between items-center p-3 hover:bg-gray-800/50 rounded-xl cursor-pointer transition-all duration-300 mb-1">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 rounded-full bg-blue-500 group-hover:scale-150 transition-transform duration-300"></div>
+          <div class="flex items-center gap-2">
+            <span class="font-medium">Work</span>
+            <span class="text-xs text-gray-500">· 8 tasks</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full text-xs">8</span>
+          <button class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 text-gray-500 hover:text-white">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- List 1 (Dynamic List Example) -->
+      <div class="group flex justify-between items-center p-3 hover:bg-gray-800/50 rounded-xl cursor-pointer transition-all duration-300 mb-1">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 rounded-full bg-green-500 group-hover:scale-150 transition-transform duration-300"></div>
+          <div class="flex items-center gap-2">
+            <span class="font-medium">Shopping</span>
+            <span class="text-xs text-gray-500">· 5 tasks</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full text-xs">5</span>
+          <button class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 text-gray-500 hover:text-white">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Add New List -->
+      <div class="group flex items-center gap-3 p-3 mt-2 border border-dashed border-gray-700 rounded-xl hover:border-blue-500 hover:bg-gray-800/30 cursor-pointer transition-all duration-300">
+        <div class="text-gray-500 group-hover:text-blue-400 group-hover:rotate-90 transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+        </div>
+        <span class="text-gray-400 group-hover:text-blue-400 font-medium">Add New List</span>
+      </div>
+    </div>
+
+    <!-- Settings & Profile Section -->
+    <div class="settings mt-auto pt-6 border-t border-gray-800">
+      <!-- Settings -->
+      <div class="group flex items-center gap-3 p-3 hover:bg-gray-800/50 rounded-xl cursor-pointer transition-all duration-300 mb-1">
+        <div class="text-gray-500 group-hover:text-blue-400 group-hover:rotate-90 transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+          </svg>
+        </div>
+        <span class="text-gray-300 group-hover:text-white font-medium">Settings</span>
+      </div>
+
+      <!-- Sign Out -->
+      <div class="group flex items-center gap-3 p-3 hover:bg-red-500/10 rounded-xl cursor-pointer transition-all duration-300">
+        <div class="text-gray-500 group-hover:text-red-400 group-hover:translate-x-1 transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+          </svg>
+        </div>
+        <span class="text-gray-300 group-hover:text-red-400 font-medium">Sign Out</span>
+      </div>
+    </div>
+
+    <!-- User Profile (Optional) -->
+    <div class="mt-6 pt-4 border-t border-gray-800">
+      <div class="flex items-center gap-3 p-2">
+        <div class="w-10 h-10 rounded-full bg-linear-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold">
+          JD
+        </div>
+        <div class="flex-1">
+          <div class="font-medium text-gray-200">John Doe</div>
+          <div class="text-xs text-gray-500">john@example.com</div>
+        </div>
+        <div class="text-gray-500 hover:text-white cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 0 1 0 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 0 1 0-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.077-.124a6.57 6.57 0 0 1 .22-.128c.331-.183.581-.495.645-.869l.213-1.28Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Bottom Section -->
-  <div class="border-t pt-4">
-    <!-- Settings -->
-    <div
-      class="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
-    >
-      <!-- settings icon -->
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-5 h-5 text-gray-600"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M12 6V3"
-        />
-      </svg>
-
-      Settings
-    </div>
-
-    <!-- Logout -->
-    <div
-      class="flex items-center gap-3 p-2 hover:bg-red-50 text-red-500 rounded-lg cursor-pointer"
-    >
-      <!-- logout icon -->
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M17 16l4-4m0 0l-4-4"
-        />
-      </svg>
-
-      Sign Out
-    </div>
+  <!-- Main Content Area (Your existing todo app content) -->
+  <div class="flex-1 p-4">
+    <!-- Your existing todo app content goes here -->
+    <!-- This is where you'll put the todo list and task details from previous responses -->
   </div>
 </div>
+
+<!-- JavaScript for Sidebar Interactions -->
+<script>
+  // Toggle sidebar collapse (optional)
+  let sidebarCollapsed = false;
+  
+  function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.flex-1');
+    
+    if (!sidebarCollapsed) {
+      sidebar.classList.add('w-20');
+      sidebar.classList.remove('w-80');
+      mainContent.classList.add('ml-4');
+      // Hide text, show only icons
+      document.querySelectorAll('.sidebar span:not(.sr-only)').forEach(el => {
+        if (!el.closest('.menu') && !el.closest('.user-profile')) {
+          el.classList.add('hidden');
+        }
+      });
+    } else {
+      sidebar.classList.remove('w-20');
+      sidebar.classList.add('w-80');
+      mainContent.classList.remove('ml-4');
+      document.querySelectorAll('.sidebar span').forEach(el => {
+        el.classList.remove('hidden');
+      });
+    }
+    sidebarCollapsed = !sidebarCollapsed;
+  }
+
+  // Add click handlers for list items
+  document.querySelectorAll('.tasks div, .list div').forEach(item => {
+    item.addEventListener('click', function(e) {
+      // Remove active class from all items
+      document.querySelectorAll('.tasks div, .list div').forEach(el => {
+        el.classList.remove('bg-gray-800', 'text-white');
+      });
+      // Add active class to clicked item
+      if (!e.target.closest('.group').classList.contains('border-dashed')) {
+        e.target.closest('.group').classList.add('bg-gray-800', 'text-white');
+      }
+    });
+  });
+</script>
+
+<!-- Add custom scrollbar styles -->
+<style>
+  /* Custom scrollbar for sidebar */
+  .sidebar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .sidebar::-webkit-scrollbar-track {
+    background: #1f2937;
+    border-radius: 10px;
+  }
+
+  .sidebar::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 10px;
+  }
+
+  .sidebar::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+
+  /* Smooth transitions */
+  .sidebar {
+    transition: width 0.3s ease-in-out;
+  }
+
+  .sidebar .group {
+    transition: all 0.2s ease;
+  }
+
+  /* Active state for selected items */
+  .sidebar .group.active {
+    @apply bg-gray-800 text-white;
+  }
+</style>
