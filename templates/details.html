@@ -1,0 +1,483 @@
+
+<div class="max-w-6xl mx-auto px-4 py-6">
+  <!-- Back Button -->
+  <div class="mb-6">
+    <a href="#" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+      </svg>
+      <span class="font-medium">Back to Tasks</span>
+    </a>
+  </div>
+
+  <!-- Main Task Details Container -->
+  <div class="task_details">
+    <!-- Left Column - Main Task -->
+    <div class="lg:col-span-2">
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <!-- Task Header -->
+        <div class="flex items-start justify-between mb-6">
+          <div class="flex items-center gap-4">
+            <!-- Custom Checkbox -->
+            <div class="relative">
+              <input 
+                type="checkbox" 
+                {% if todo.completed %}checked{% endif %}
+                class="peer hidden" 
+                id="task-complete"
+                onchange="toggleTaskComplete({{ todo.id }})"
+              >
+              <label 
+                for="task-complete" 
+                class="flex items-center justify-center w-7 h-7 border-2 border-gray-300 rounded-lg cursor-pointer peer-checked:border-green-500 peer-checked:bg-green-500 hover:border-green-400 transition-all"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+              </label>
+            </div>
+            
+            <!-- Title -->
+            <div class="task">
+              <input 
+                type="text" 
+                value="{{ todo.title }}"
+                id="task-title"
+                class="title text-2xl font-bold bg-transparent border-b-2 border-transparent focus:border-blue-500 outline-none px-2 py-1 w-full transition"
+                placeholder="Task title"
+                onblur="updateTaskTitle({{ todo.id }})"
+              />
+            </div>
+          </div>
+
+          <!-- Priority Badge -->
+          <div class="flex items-center gap-2">
+            <select 
+              id="task-priority" 
+              class="border rounded-lg px-3 py-1.5 text-sm font-medium bg-white"
+              onchange="updateTaskPriority({{ todo.id }})"
+            >
+              <option value="low" {% if todo.priority == 'low' %}selected{% endif %}>🔵 Low</option>
+              <option value="medium" {% if todo.priority == 'medium' %}selected{% endif %}>🟡 Medium</option>
+              <option value="high" {% if todo.priority == 'high' %}selected{% endif %}>🔴 High</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="description mb-6">
+          <textarea 
+            id="task-description" 
+            rows="4"
+            class="w-full border border-gray-200 rounded-xl p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none transition"
+            placeholder="Add a description..."
+            onblur="updateTaskDescription({{ todo.id }})"
+          >{{ todo.description }}</textarea>
+        </div>
+
+        <!-- Task Metadata -->
+        <div class="flex items-center gap-6 text-sm text-gray-500 border-t border-gray-100 pt-4">
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Created {{ todo.created_at|timesince }} ago</span>
+          </div>
+          {% if todo.updated_at != todo.created_at %}
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            <span>Updated {{ todo.updated_at|timesince }} ago</span>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column - Task Details Panel -->
+    <div class="lg:col-span-1">
+      <div class="list_personal bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
+        <h3 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+          </svg>
+          Task Details
+        </h3>
+
+        <!-- Personal List Selection -->
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-gray-600">List</label>
+          <div class="flex items-center justify-between bg-gray-50 rounded-xl p-3">
+            <div class="flex items-center gap-3">
+              <div class="icon">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                  </svg>
+                </div>
+              </div>
+              <span class="font-medium">Personal</span>
+            </div>
+            <button class="text-blue-500 hover:text-blue-600 text-sm font-medium" onclick="changeList()">
+              Change
+            </button>
+          </div>
+        </div>
+
+        <!-- Due Date -->
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-gray-600">Due Date</label>
+          <div class="due_date bg-gray-50 rounded-xl p-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                </svg>
+                <input 
+                  type="date" 
+                  id="due-date"
+                  value="{{ todo.due_date|date:'Y-m-d' }}"
+                  class="bg-transparent border-none focus:ring-0 p-0 text-sm"
+                  onchange="updateDueDate({{ todo.id }})"
+                >
+              </div>
+              {% if todo.due_date %}
+              <span class="text-xs px-2 py-1 rounded-full 
+                {% if todo.is_overdue %}bg-red-100 text-red-600
+                {% elif todo.is_today %}bg-green-100 text-green-600
+                {% else %}bg-gray-100 text-gray-600{% endif %}">
+                {% if todo.is_overdue %}Overdue
+                {% elif todo.is_today %}Today
+                {% else %}{{ todo.due_date|date:'M d'}}{% endif %}
+              </span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Tags Section -->
+        <div class="tags space-y-2">
+          <label class="text-sm font-medium text-gray-600">Tags</label>
+          
+          <!-- Existing Tags -->
+          <div class="flex flex-wrap gap-2 mb-3">
+            {% for tag in todo.tags.all %}
+            <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm" style="background-color: {{ tag.color }}20; color: {{ tag.color }}">
+              {{ tag.name }}
+              <button onclick="removeTag({{ todo.id }}, {{ tag.id }})" class="hover:opacity-75">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </span>
+            {% endfor %}
+          </div>
+
+          <!-- Add Tag Input -->
+          <div class="add_tag_option relative">
+            <div class="flex gap-2">
+              <input 
+                type="text" 
+                id="tag-input"
+                placeholder="Add a tag..."
+                class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                onkeypress="handleTagKeyPress(event, {{ todo.id }})"
+              >
+              <button 
+                onclick="addTag({{ todo.id }})"
+                class="px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Tag Suggestions (Optional) -->
+            <div id="tag-suggestions" class="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg hidden">
+              <!-- Will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Subtasks Section -->
+        <div class="subtask space-y-2">
+          <label class="text-sm font-medium text-gray-600">Subtasks</label>
+          
+          <!-- Add New Subtask -->
+          <div class="flex gap-2 mb-3">
+            <input 
+              type="text" 
+              id="subtask-input"
+              placeholder="Add a subtask..."
+              class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              onkeypress="handleSubtaskKeyPress(event, {{ todo.id }})"
+            >
+            <button 
+              onclick="addSubtask({{ todo.id }})"
+              class="px-3 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Subtask List -->
+          <div class="space-y-2">
+            {% for subtask in todo.subtasks.all %}
+            <div class="flex items-center gap-3 bg-gray-50 rounded-lg p-3 group" id="subtask-{{ subtask.id }}">
+              <!-- Checkbox -->
+              <div class="relative">
+                <input 
+                  type="checkbox" 
+                  {% if subtask.completed %}checked{% endif %}
+                  class="peer hidden" 
+                  id="subtask-{{ subtask.id }}"
+                  onchange="toggleSubtask({{ subtask.id }})"
+                >
+                <label 
+                  for="subtask-{{ subtask.id }}" 
+                  class="flex items-center justify-center w-5 h-5 border-2 border-gray-300 rounded cursor-pointer peer-checked:border-green-500 peer-checked:bg-green-500 hover:border-green-400 transition-all"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white opacity-0 peer-checked:opacity-100" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </label>
+              </div>
+
+              <!-- Subtask Title -->
+              <span class="flex-1 text-sm {% if subtask.completed %}line-through text-gray-400{% endif %}">
+                {{ subtask.title }}
+              </span>
+
+              <!-- Delete Button -->
+              <button 
+                onclick="deleteSubtask({{ subtask.id }})" 
+                class="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 transition-all"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
+            {% empty %}
+            <p class="text-sm text-gray-400 text-center py-4">No subtasks yet. Add one above!</p>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Task Actions -->
+        <div class="border-t border-gray-100 pt-4 flex justify-end gap-3">
+          <button onclick="deleteTask({{ todo.id }})" class="flex items-center gap-2 px-4 py-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+            Delete Task
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript for Interactions -->
+<script>
+  // Task title update
+  function updateTaskTitle(taskId) {
+    const title = document.getElementById('task-title').value;
+    fetch(`/api/todo/${taskId}/update/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ title: title })
+    });
+  }
+
+  // Task description update
+  function updateTaskDescription(taskId) {
+    const description = document.getElementById('task-description').value;
+    fetch(`/api/todo/${taskId}/update/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ description: description })
+    });
+  }
+
+  // Toggle task complete
+  function toggleTaskComplete(taskId) {
+    const completed = document.getElementById('task-complete').checked;
+    fetch(`/api/todo/${taskId}/toggle/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ completed: completed })
+    });
+  }
+
+  // Update priority
+  function updateTaskPriority(taskId) {
+    const priority = document.getElementById('task-priority').value;
+    fetch(`/api/todo/${taskId}/update/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ priority: priority })
+    });
+  }
+
+  // Update due date
+  function updateDueDate(taskId) {
+    const dueDate = document.getElementById('due-date').value;
+    fetch(`/api/todo/${taskId}/update/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ due_date: dueDate })
+    });
+  }
+
+  // Tag functions
+  function addTag(taskId) {
+    const input = document.getElementById('tag-input');
+    const tagName = input.value.trim();
+    if (tagName) {
+      fetch(`/api/todo/${taskId}/add_tag/`, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: tagName })
+      }).then(() => location.reload());
+    }
+  }
+
+  function handleTagKeyPress(event, taskId) {
+    if (event.key === 'Enter') {
+      addTag(taskId);
+    }
+  }
+
+  function removeTag(taskId, tagId) {
+    fetch(`/api/todo/${taskId}/remove_tag/${tagId}/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}'
+      }
+    }).then(() => location.reload());
+  }
+
+  // Subtask functions
+  function addSubtask(taskId) {
+    const input = document.getElementById('subtask-input');
+    const subtaskTitle = input.value.trim();
+    if (subtaskTitle) {
+      fetch(`/api/todo/${taskId}/add_subtask/`, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: subtaskTitle })
+      }).then(() => location.reload());
+    }
+  }
+
+  function handleSubtaskKeyPress(event, taskId) {
+    if (event.key === 'Enter') {
+      addSubtask(taskId);
+    }
+  }
+
+  function toggleSubtask(subtaskId) {
+    const completed = document.getElementById(`subtask-${subtaskId}`).checked;
+    fetch(`/api/subtask/${subtaskId}/toggle/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ completed: completed })
+    }).then(() => location.reload());
+  }
+
+  function deleteSubtask(subtaskId) {
+    if (confirm('Delete this subtask?')) {
+      fetch(`/api/subtask/${subtaskId}/delete/`, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}'
+        }
+      }).then(() => location.reload());
+    }
+  }
+
+  function deleteTask(taskId) {
+    if (confirm('Are you sure you want to delete this task?')) {
+      fetch(`/api/todo/${taskId}/delete/`, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}'
+        }
+      }).then(() => {
+        window.location.href = '#';
+      });
+    }
+  }
+
+  function changeList() {
+    // Implement list change functionality
+    alert('List change feature coming soon!');
+  }
+</script>
+
+<!-- Add this to your models if not already present -->
+{% comment %}
+Add to models.py:
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    color = models.CharField(max_length=7, default='#3B82F6')  # Hex color
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+class Subtask(models.Model):
+    todo = models.ForeignKey(Todo, on_delete=models.CASCADE, related_name='subtasks')
+    title = models.CharField(max_length=200)
+    completed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+class Todo(models.Model):
+    # ... existing fields ...
+    priority = models.CharField(max_length=10, choices=[
+        ('low', 'Low'),
+        ('medium', 'Medium'), 
+        ('high', 'High')
+    ], default='medium')
+    due_date = models.DateField(null=True, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
+    
+    @property
+    def is_overdue(self):
+        if self.due_date:
+            return self.due_date < date.today() and not self.completed
+        return False
+    
+    @property
+    def is_today(self):
+        if self.due_date:
+            return self.due_date == date.today()
+        return False
+{% endcomment %}

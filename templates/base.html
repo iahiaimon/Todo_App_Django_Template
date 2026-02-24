@@ -1,0 +1,55 @@
+{% load static %}
+{% load tailwind_tags %}
+
+
+<!doctype html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Todo Application</title>
+
+  <!-- Tailwind CSS -->
+  {% tailwind_css %}
+
+</head>
+
+
+<body class="bg-gray-100 h-screen overflow-hidden">
+
+  <div class="flex h-full w-full gap-4 p-4">
+
+    <!-- Sidebar -->
+    <aside class="w-1/4 bg-white rounded-xl shadow overflow-y-auto">
+
+      {% include 'sidebar.html' %}
+
+    </aside>
+
+
+    <!-- Main -->
+    <main class="w-2/5 bg-gray-50 rounded-xl overflow-y-auto">
+
+      {% block content %}
+
+      {% endblock %}
+
+    </main>
+
+
+
+    <!-- Details -->
+    <section class="w-[35%] bg-white rounded-xl shadow overflow-y-auto">
+
+      {% include 'details.html' %}
+
+    </section>
+
+
+  </div>
+
+
+</body>
+</html>
