@@ -7,10 +7,6 @@ from .forms import TodoForm , CustomUserForm
 
 # Create your views here.
 
-def home(requests):
-    # return HttpResponse("This is from views")
-    return render (requests , "input.html")
-
 def todoview(request):
     if request.method == "POST":
         form = TodoForm(request.POST)
