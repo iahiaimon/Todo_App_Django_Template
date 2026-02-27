@@ -12,7 +12,7 @@ def todoview(request):
         form = TodoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("todo.html")  # change to your URL name
+            return redirect("todo")  # change to your URL name
     else:
         form = TodoForm()
 
